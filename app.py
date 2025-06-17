@@ -36,7 +36,12 @@ import uuid
 # Base URL for tracking (update this with your actual domain)
 # BASE_URL = "http://localhost:5000" 
 #  # Change to your actual domain
-BASE_URL = "https://453f-106-222-217-143.ngrok-free.app"
+# BASE_URL = "https://453f-106-222-217-143.ngrok-free.app"
+BASE_URL = "https://xsmart-sendmail.vercel.app"
+
+@app.route('/health')
+def health():
+    return jsonify({'status': 'ok'})
 
 # TEST_CAMPAIGN_ID = str(uuid.uuid4())
 import uuid
