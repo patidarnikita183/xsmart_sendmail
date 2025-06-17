@@ -47,6 +47,7 @@ def health():
 import uuid
 
 def get_unique_int():
+    print("get_unique_int")
     u = uuid.uuid4()
     return u.int >> 96
 TEST_CAMPAIGN_ID = get_unique_int()
@@ -170,6 +171,8 @@ def init_tracking_db():
     conn.commit()
     conn.close()
     print(f"✅ Database initialized with campaign ID: {TEST_CAMPAIGN_ID}")
+
+
 
 def generate_tracking_id():
     """Generate unique tracking ID"""
@@ -438,6 +441,14 @@ def tracking_loop():
         # Wait 2 minutes (120 seconds)
         print("⏳ Waiting 2 minutes for next real-time update...")
         time.sleep(120)
+
+
+# Initialize database
+init_tracking_db()
+
+# Start tracking thread
+tracking_thread = threading.Thread(target=tracking_loop, daemon=True)
+tracking_thread.start()
 
 # Tracking Routes
 @app.route('/track/open/<tracking_id>')
